@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "releasify"
+authors = [
+    {name = "Franklyn Vasquez", email = "franklynvasquez24@gmail.com"},
+]
+description = "Repo Releasification"
+readme = "README.md"
+license = {text = "MIT"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "PyYAML",
+]
+dynamic = ["version"]
+
+[project.scripts]
+releasify = "releasify.__main__:module_entry"
