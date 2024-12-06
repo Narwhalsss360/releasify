@@ -1,13 +1,14 @@
 import subprocess
 from .auto_parse_str import auto_parse_str
+from .auto_glob import auto_glob
 from .kwarg_aliasing import alias_kwargs
 from .pathops import Path, copy_path, move_path, delete_path
 from .action_handlers import action_handler
 from .errors import ReleasifyError
 
-
 @action_handler(('copy', 'cp'))
 @alias_kwargs({'source': ('src',), 'destination': ('dst',)})
+@auto_glob((0, 'source'), (1, 'destination'))
 @auto_parse_str({(0, 'source'): Path, (1, 'destination'): Path})
 def copy_action(source: Path, destination: Path) -> str:
     try:
@@ -19,6 +20,7 @@ def copy_action(source: Path, destination: Path) -> str:
 
 @action_handler(('move', 'mv'))
 @alias_kwargs({'source': ('src',), 'destination': ('dst',)})
+@auto_glob((0, 'source'), (1, 'destination'))
 @auto_parse_str({(0, 'source'): Path, (1, 'destination'): Path})
 def move_action(source: Path, destination: Path) -> str:
     try:
